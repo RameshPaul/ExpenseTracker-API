@@ -1,0 +1,4 @@
+{
+	"port": 8080,
+	"envFile": "google-expense-tracker.env"
+}

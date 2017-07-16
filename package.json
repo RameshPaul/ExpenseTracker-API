@@ -1,0 +1,38 @@
+{
+  "name": "expense-tracker-api",
+  "version": "0.0.1",
+  "author": {
+    "name": "Clément GARBAY",
+    "email": "clementgarbay@gmail.com"
+  },
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "build": "babel src -d dist",
+    "start": "node dist/index.js",
+    "start:dev": "nodemon src/index.js --exec babel-node"
+  },
+  "env": {
+    "GOOGLE_CLIENT_EMAIL": "@google-client-email",
+    "GOOGLE_PRIVAYE_KEY": "@google-private-key"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cors": "^2.8.3",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.3",
+    "express-validator": "^3.2.1",
+    "googleapis": "^20.1.0",
+    "homedir": "^0.6.0",
+    "morgan": "^1.8.2",
+    "winston": "^2.3.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.25.0",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "nodemon": "^1.11.0"
+  }
+}
