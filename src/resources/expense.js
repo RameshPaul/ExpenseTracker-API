@@ -1,4 +1,5 @@
 import { Readable } from 'stream'
+import uuid from 'uuid'
 
 import expenseValidator from './expense-validator'
 import logger from '../services/logger'
@@ -6,11 +7,14 @@ import { authenticate, addFile, addRowInSheet, shareFile } from '../services/goo
 import Expense from '../models/expense'
 import { exceptionToResponse } from '../helpers'
 
+const buildFileName = (date) => `${date.replace(/\//g, '-')}_${uuid.v4()}.jpg`
+
 export default {
   add: async (req, res) => {
     try {
       const reqBody = await expenseValidator(req)
       const expense = new Expense(reqBody)
+      const fileName = buildFileName(expense.date)
 
       // Create stream from base64 string
       const fileStream = new Readable()
