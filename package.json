@@ -15,7 +15,7 @@
   "now": {
     "env": {
       "GOOGLE_CLIENT_EMAIL": "@google-client-email",
-      "GOOGLE_PRIVAYE_KEY": "@google-private-key"
+      "GOOGLE_PRIVATE_KEY": "@google-private-key"
     }
   },
   "dependencies": {
