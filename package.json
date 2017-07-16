@@ -12,9 +12,11 @@
     "start": "node dist/index.js",
     "start:dev": "nodemon src/index.js --exec babel-node"
   },
-  "env": {
-    "GOOGLE_CLIENT_EMAIL": "@google-client-email",
-    "GOOGLE_PRIVAYE_KEY": "@google-private-key"
+  "now": {
+    "env": {
+      "GOOGLE_CLIENT_EMAIL": "@google-client-email",
+      "GOOGLE_PRIVAYE_KEY": "@google-private-key"
+    }
   },
   "dependencies": {
     "body-parser": "^1.17.2",
@@ -25,6 +27,7 @@
     "googleapis": "^20.1.0",
     "homedir": "^0.6.0",
     "morgan": "^1.8.2",
+    "uuid": "^3.1.0",
     "winston": "^2.3.1"
   },
   "devDependencies": {

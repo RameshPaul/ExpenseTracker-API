@@ -55,6 +55,6 @@ By default, the file `google-expense-tracker.env` of your home directory is used
 It contains:
 
 ```
-GOOGLE_PRIVATE_KEY=<your google private key>
+GOOGLE_PRIVATE_KEY=<your google private key base64 encoded>
 GOOGLE_CLIENT_EMAIL=<your google client email>
 ```

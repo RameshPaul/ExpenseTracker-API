@@ -12,7 +12,7 @@ export function authenticate () {
     const authClient = new google.auth.JWT(
       process.env.GOOGLE_CLIENT_EMAIL,
       null,
-      process.env.GOOGLE_PRIVATE_KEY,
+      Buffer.from(process.env.GOOGLE_PRIVATE_KEY, 'base64').toString('ascii'),
       ['https://www.googleapis.com/auth/drive']
     )
 
