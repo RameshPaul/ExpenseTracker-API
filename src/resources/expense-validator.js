@@ -10,7 +10,7 @@ export default (req) => {
   req.checkBody('amount', 'Must be a decimal value, not empty').notEmpty().isDecimal()
   req.checkBody('currency', `Must be part of [${[...currencies]}], not empty`).notEmpty().inArray(currencies)
   req.checkBody('date', 'Must be a date, not empty').notEmpty().isDate()
-  req.checkBody('proof', 'Must be a base64 (jpg), not empty').notEmpty().isBase64()
+  req.checkBody('proof', 'Must be a file, not empty').isFile(req.files.proof)
 
   // Validates Google attributes
   req.checkBody('gg_spreadsheetId', 'Must not be empty').notEmpty()
@@ -21,7 +21,7 @@ export default (req) => {
       if (!result.isEmpty()) {
         reject(new Error(result.useFirstErrorOnly().array(), 400))
       } else {
-        resolve(req.body)
+        resolve()
       }
     })
   })

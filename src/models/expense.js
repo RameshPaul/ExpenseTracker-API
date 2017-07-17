@@ -1,12 +1,12 @@
 export default class Expense {
-  constructor (data) {
-    this.type = data.type
-    this.recipient = data.recipient
-    this.description = data.description
-    this.amount = data.amount
-    this.currency = data.currency
-    this.date = data.date
-    this.proof = data.proof
+  constructor (type, recipient, description, amount, currency, date, proof) {
+    this.type = type
+    this.recipient = recipient
+    this.description = description
+    this.amount = amount
+    this.currency = currency
+    this.date = date
+    this.proof = proof
   }
 
   toArray () {

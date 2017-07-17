@@ -12,13 +12,24 @@ const buildFileName = (date) => `${date.replace(/\//g, '-')}_${uuid.v4()}.jpg`
 export default {
   add: async (req, res) => {
     try {
-      const reqBody = await expenseValidator(req)
-      const expense = new Expense(reqBody)
+      await expenseValidator(req)
+
+      const expense = new Expense(
+        req.body.type,
+        req.body.recipient,
+        req.body.description,
+        req.body.amount,
+        req.body.currency,
+        req.body.date,
+        req.files.proof
+      )
+      const googleFolderId = req.body.gg_folderId
+      const googleSpreadsheetId = req.body.gg_spreadsheetId
       const fileName = buildFileName(expense.date)
 
-      // Create stream from base64 string
+      // Create stream from file Buffer
       const fileStream = new Readable()
-      fileStream.push(expense.proof, 'base64')
+      fileStream.push(expense.proof.data)
       fileStream.push(null)
 
       // Authentication on Google
@@ -27,17 +38,17 @@ export default {
       // Store (proof) file on Google Drive
       const fileIdOnGoogleDrive = await addFile(
         googleAuthClient,
-        fileStream, // fs.createReadStream(filePath),
+        fileStream,
         fileName,
-        'image/jpeg',
-        reqBody.gg_folderId
+        expense.proof.mimetype,
+        googleFolderId
       )
 
       // Share this file (public share)
       const fileUrl = await shareFile(googleAuthClient, fileIdOnGoogleDrive)
 
       // Add a new row on Google Spreadsheet
-      await addRowInSheet(googleAuthClient, reqBody.gg_spreadsheetId, [...expense.toArray(), fileUrl])
+      await addRowInSheet(googleAuthClient, googleSpreadsheetId, [...expense.toArray(), fileUrl])
 
       res.status(201)
     } catch (e) {

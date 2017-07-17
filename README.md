@@ -30,18 +30,16 @@ with only one API call.
 ```
 curl -X POST \
   http://localhost:8080/expense \
-  -H 'content-type: application/json' \
-  -d '{
-    "gg_spreadsheetId": "<google spreadsheet id>",
-    "gg_folderId": "<google folder id>",
-    "type": "EATING",
-    "recipient": "Pret A Manger",
-    "description": "Déjeuner",
-    "amount": "8.32",
-    "currency": "£",
-    "date": "2017/07/16",
-    "proof": "R0lGODlhPQBEAPeoAJos..."
-  }'
+  -H 'content-type: multipart/form-data' \
+  -F proof=@IMG_1577.jpg \
+  -F gg_spreadsheetId=<google spreadsheet id> \
+  -F gg_folderId=<google folder id> \
+  -F type=TRANSPORT \
+  -F 'recipient=Boutique truc' \
+  -F 'description=Déjeuner' \
+  -F amount=24.34 \
+  -F 'currency=£' \
+  -F date=2017-07-17
 ```
 
 ## Permissions
