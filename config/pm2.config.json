@@ -1,0 +1,26 @@
+{
+  "apps": [{
+    "name": "ExpenseTracker",
+    "script": "dist/app.js",
+    "env": {
+      "COMMON_VARIABLE": "true"
+    },
+    "env_production" : {
+      "NODE_ENV": "production"
+    }
+  }],
+  "deploy" : {
+    "production" : {
+      "user": "clement",
+      "host": "cosmos",
+      "ref": "origin/master",
+      "repo": "https://github.com/clementgarbay/ExpenseTracker-API.git",
+      "path": "/volume1/web-apps/api/expense-tracker",
+      "post-deploy": "export PATH=$PATH:/usr/local/bin/ && npm install && npm run build && pm2 startOrRestart config/pm2.config.json --env production",
+      "env"  : {
+        "NODE_ENV": "production",
+        "PORT": "8128"
+      }
+    }
+  }
+}
