@@ -14,7 +14,7 @@ export default (app) => {
         return array.indexOf(value) >= 0
       },
       isFile: (value, file) => {
-        return !!file.name && !!file.mimetype && !!file.data
+        return file && !!file.name && !!file.mimetype && !!file.data
       }
     }
   }))
