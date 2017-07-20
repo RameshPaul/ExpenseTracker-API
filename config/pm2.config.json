@@ -2,12 +2,7 @@
   "apps": [{
     "name": "ExpenseTracker",
     "script": "dist/app.js",
-    "env": {
-      "COMMON_VARIABLE": "true"
-    },
-    "env_production" : {
-      "NODE_ENV": "production"
-    }
+    "log_date_format": "YYYY-MM-DD HH:mm:ss Z"
   }],
   "deploy" : {
     "production" : {
