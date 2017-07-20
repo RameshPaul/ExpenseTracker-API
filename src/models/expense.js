@@ -16,7 +16,8 @@ export default class Expense {
       this.description,
       this.amount,
       this.currency,
-      this.date
+      this.date,
+      this.proof
     ]
   }
 }

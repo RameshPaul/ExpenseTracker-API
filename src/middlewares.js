@@ -1,5 +1,5 @@
+import bodyParser from 'body-parser'
 import validator from 'express-validator'
-import fileUpload from 'express-fileupload'
 import morgan from 'morgan'
 import cors from 'cors'
 import { stream } from './services/logger'
@@ -7,7 +7,7 @@ import { stream } from './services/logger'
 export default (app) => {
   app.use(morgan('dev', { stream }))
   app.use(cors())
-  app.use(fileUpload())
+  app.use(bodyParser.json())
   app.use(validator({
     customValidators: {
       inArray: (value, array) => {

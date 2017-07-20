@@ -23,23 +23,37 @@ This API allows me to automate this process of writing each expense by:
 - Create a shareable link for this file
 - Add a row for the expense (with all information) on a Google Spreadsheet
 
-with only one API call.
-
 ## Example
+
+1. Upload the image via stream and websocket connection
+
+```
+emit('upload:image', stream, {
+  mimetype: 'image/jpeg',
+  size: 1283
+})
+```
+
+- `upload:image:progress`: event send on the socket with the upload progression
+- `upload:image:success`: event send on the socket with the shareable file url when the upload will finish
+- `upload:image:error`: event send on the socket with the failure
+
+2. Make a simple HTTP API call to add the new expense
 
 ```
 curl -X POST \
   http://localhost:8080/expense \
-  -H 'content-type: multipart/form-data' \
-  -F proof=@IMG_1577.jpg \
-  -F gg_spreadsheetId=<google spreadsheet id> \
-  -F gg_folderId=<google folder id> \
-  -F type=TRANSPORT \
-  -F 'recipient=Boutique truc' \
-  -F 'description=Déjeuner' \
-  -F amount=24.34 \
-  -F 'currency=£' \
-  -F date=2017-07-17
+  -H 'content-type: application/json' \
+  -d '{
+    "gg_spreadsheetId": "<google spreadsheet id>",
+    "type": "EATING",
+    "recipient": "Pret A Manger",
+    "description": "Déjeuner",
+    "amount": "8.32",
+    "currency": "£",
+    "date": "2017/07/16",
+    "proof": "<the file url from step 1>"
+  }'
 ```
 
 ## Permissions

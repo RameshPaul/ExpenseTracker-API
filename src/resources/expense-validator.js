@@ -10,11 +10,10 @@ export default (req) => {
   req.checkBody('amount', 'Must be a decimal value, not empty').notEmpty().isDecimal()
   req.checkBody('currency', `Must be part of [${[...currencies]}], not empty`).notEmpty().inArray(currencies)
   req.checkBody('date', 'Must be a date, not empty').notEmpty().isDate()
-  req.checkBody('proof', 'Must be a file, not empty').isFile(req.files.proof)
+  req.checkBody('proof', 'Must be an url, not empty').notEmpty()
 
   // Validates Google attributes
   req.checkBody('gg_spreadsheetId', 'Must not be empty').notEmpty()
-  req.checkBody('gg_folderId', 'Must not be empty').notEmpty()
 
   return new Promise((resolve, reject) => {
     req.getValidationResult().then((result) => {
